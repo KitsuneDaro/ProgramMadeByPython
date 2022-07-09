@@ -41,30 +41,38 @@ end_chr = data['end_chr']
 rank = data['rank']
 
 dictionary = data['data'][name]
-words = [sta_chr]
-words_i = 0
 
-while words[-1] != end_chr:
-    common = dictionary[words[words_i]][0]
 
-    for i in range(1, rank):
-        if i > words_i:
-            break
+n = int(input('何回？>'))
 
-        next_common = common_list(common, dictionary[words[words_i - i]][i])
+while n > 0:
+    for loop_i in range(n):
+        words = [sta_chr]
+        words_i = 0
 
-        if len(next_common) > 0:
-            common = next_common
-        else:
-            break
+        while words[-1] != end_chr:
+            common = dictionary[words[words_i]][0]
 
-    random_i = random.randrange(len(common))
-    words.append(common[random_i])
+            for i in range(1, rank):
+                if i > words_i:
+                    break
 
-    words_i += 1
+                next_common = common_list(common, dictionary[words[words_i - i]][i])
 
-text = ''
-for words_i in range(1, len(words) - 1):
-    text += words[words_i]
+                if len(next_common) > 0:
+                    common = next_common
+                else:
+                    break
 
-print(text)
+            random_i = random.randrange(len(common))
+            words.append(common[random_i])
+
+            words_i += 1
+
+        text = ''
+        for words_i in range(1, len(words) - 1):
+            text += words[words_i]
+
+        print(text)
+    
+    n = int(input('何回？'))
